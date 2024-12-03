@@ -1,0 +1,64 @@
+aside.sidenav {
+  position: sticky;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+  padding: 6rem 1.4rem ;
+  background-color:transparent ;
+  border-right: 1px solid #e0e0e04c;
+  .logo-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+      width: 200px;
+    }
+    span{
+      font-size: 14px;
+      font-weight: bold;
+      color: #b8c5ca;
+    }
+  }
+  .tabs-holder {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      .icon{
+        // background-color: #1f3a5f;
+        background-color: #1f2b3e;
+        padding: 9px;
+        border-radius:.375rem ;
+        svg{
+          font-size: 26px;
+          color: #e0e0e0;
+          // color: #acc2ef;
+        }
+      }
+      .link{
+        font-size:14px ;
+      }
+    }
+  }
+  .logout{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    svg{
+      font-size: 26px;
+    }
+  }
+}
+.right-section{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}

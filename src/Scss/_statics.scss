@@ -1,0 +1,31 @@
+.statics-cont {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  // gap: 2rem;
+  .static{
+    display: flex;
+    align-items: center;
+    background: rgb(31,58,95);
+    background: linear-gradient(90deg, rgba(31,58,95,1) 0%, rgba(77,100,141,1) 100%);
+    padding: 15px;
+    border-radius: 12px;
+    gap: 20px;
+    min-width: 250px;
+    svg{
+      font-size: 56px;
+      color: #fff;
+    }
+    h1{
+      display: flex;
+      align-items: center;
+      font-size: 36px;
+      svg{
+        font-size: 25px;
+      }
+    }
+    span{
+      font-size: 10px;
+    }
+  }
+}
