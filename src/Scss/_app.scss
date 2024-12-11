@@ -4,7 +4,7 @@
 @import './main';
 @import './statics';
 @import './login';
-
+@import "~antd/dist/reset.css";
 *{
   box-sizing: border-box;
   font-family: "Poppins", serif;
@@ -14,16 +14,18 @@
 body{
   background-color: #0F1C2E;
   color: #fff;
+  overflow-x: hidden;
 }
 ::-webkit-scrollbar {
-  width: 5px; /* width of the scrollbar */
+  width: 5px; 
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--Deep-teal); /* color of the track */
+  background: #4a4a4a; /* color of the track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--primary-100); /* color of the scrollbar */
+  background-color: #fff; /* color of the scrollbar */
   border-radius: 0px; /* roundness of the scrollbar */
 }
 
