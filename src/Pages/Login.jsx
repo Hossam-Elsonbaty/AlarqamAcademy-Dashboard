@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { AiOutlineLogin } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 export const Login = () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('vercel-toolbar-token');
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();

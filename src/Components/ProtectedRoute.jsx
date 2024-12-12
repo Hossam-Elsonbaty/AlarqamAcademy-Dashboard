@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import React,{ useEffect } from "react";
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('vercel-toolbar-token');
   useEffect(() => {
     console.log('Token:', token);
     if (!token) {

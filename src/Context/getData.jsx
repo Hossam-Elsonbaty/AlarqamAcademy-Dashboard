@@ -6,7 +6,7 @@ const AppProvider = ({ children }) => {
   useEffect(()=>{
     getStudentApplicationsData()
   },[]);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('vercel-toolbar-token');
   const [applicationsData, setApplicationsData] = useState();
   const [isApplication, setIsApplication] = useState("studentApplications");
   const [isParent, setIsParent] = useState(true);
