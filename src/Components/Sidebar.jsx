@@ -8,7 +8,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import {AppContext} from '../Context/getData';
 export const Sidebar = () => {
   const navigate = useNavigate();
-  const {setIsApplication, getContactData, getParentApplicationsData, getStudentApplicationsData, getUsersData, setIsParent} = useContext(AppContext);
+  const {setIsApplication, getContactData, getParentApplicationsData, getStudentApplicationsData, getUsersData, setIsParent, isApplication} = useContext(AppContext);
   const handleParentApplicationsData = ()=> {
     setIsApplication("parentApplications");
     getParentApplicationsData();
@@ -39,19 +39,19 @@ export const Sidebar = () => {
         <span>Alarqam Academy</span>
       </div>
       <div className='tabs-holder'>
-        <div className='tab' onClick = {handleStudentApplicationsData}>
+        <div className={isApplication === 'studentApplications' ? 'tab active': 'tab'} onClick = {handleStudentApplicationsData}>
           <div className="icon"><BsClipboardData /></div>
           <span className="link">Student Applications</span>
         </div>
-        <div className='tab' onClick = {handleParentApplicationsData}>
+        <div className={isApplication === 'parentApplications' ? 'tab active': 'tab'} onClick = {handleParentApplicationsData}>
           <div className="icon"><BsClipboardData /></div>
           <span className="link">Parent Applications</span>
         </div>
-        <div className='tab' onClick = {handleContactData}>
+        <div className={isApplication === 'contactUs' ? 'tab active': 'tab'} onClick = {handleContactData}>
           <div className="icon"><SiAmazonsimpleemailservice /></div>
           <span className="link">Incoming Emails</span>
         </div>
-        <div className='tab' onClick = {handleUsersData}>
+        <div className={isApplication === 'users' ? 'tab active': 'tab'} onClick = {handleUsersData}>
           <div className="icon"><IoSettingsOutline /></div>
           <span className="link">Settings</span>
         </div>

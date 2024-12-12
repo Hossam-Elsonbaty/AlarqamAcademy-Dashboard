@@ -79,6 +79,8 @@ aside.sidenav .tabs-holder .tab {
   align-items: center;
   gap: 15px;
   cursor: pointer;
+  padding: 5px;
+  border-radius: 10px;
 }
 aside.sidenav .tabs-holder .tab .icon {
   background-color: #1f2b3e;
@@ -91,6 +93,9 @@ aside.sidenav .tabs-holder .tab .icon svg {
 }
 aside.sidenav .tabs-holder .tab .link {
   font-size: 14px;
+}
+aside.sidenav .tabs-holder .tab.active {
+  background-color: #1f2b3e;
 }
 aside.sidenav .logout {
   display: flex;

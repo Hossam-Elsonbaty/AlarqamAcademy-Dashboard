@@ -2,8 +2,10 @@ import React, {useState, useContext} from 'react';
 import { AppContext } from '../Context/getData';
 import Button from '@mui/material/Button';
 import { ConfigProvider, theme,Table } from 'antd';
+import {SendEmail} from './SendEmail';
 export const NestedTable = () => {
-  const {isApplication, isParent, handleClickOpen, applicationsData} = useContext(AppContext);
+  const [selectedRows, setSelectedRows] = useState([])
+  const {isApplication, isParent, handleClickOpen, applicationsData, handleClickOpenEmail} = useContext(AppContext);
   console.log(isParent)
   const items = [
     {
@@ -17,7 +19,18 @@ export const NestedTable = () => {
   ];
   const dataSource = Array.isArray(applicationsData) 
   ? applicationsData.map((key) => {
-      if (isApplication === "studentApplications") {
+    const calculateAge = (dob) => {
+      if (!dob) return null; // Handle cases where DOB is not provided
+      const birthDate = new Date(dob);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+      if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
+    };
+    if (isApplication === "studentApplications") {
         return {
           id: key._id,
           firstName: key.firstName,
@@ -26,6 +39,8 @@ export const NestedTable = () => {
           phoneNumber: key.phoneNumber,
           address: key.address,
           gender: key.gender,
+          dob: key.dob,
+          age: calculateAge(key.dob),
           city: key.city,
           zipCode: key.zipCode,
           selectedProgram: key.selectedProgram,
@@ -47,6 +62,7 @@ export const NestedTable = () => {
             firstName: child.firstName,
             lastName: child.lastName,
             dob: child.dob,
+            age:calculateAge(key.dob) ,
             gender: child.gender,
             selectedProgram: child.selectedProgram,
           })),
@@ -75,15 +91,12 @@ export const NestedTable = () => {
       title: 'First Name',
       dataIndex: 'firstName',
       key: 'firstName',
-      sorter: {
-        compare: (a, b) => a.firstName - b.firstName,
-      },
+      sorter: (a, b) => a.firstName.localeCompare(b.firstName)
     },
     {
       title: 'Last Name',
       dataIndex: 'lastName',
       key: 'lastName',
-      sorter: {compare: (a, b) => a.lastName - b.lastName,},
     },
     {
       title: 'DOB',
@@ -95,9 +108,10 @@ export const NestedTable = () => {
       title: 'Gender',
       dataIndex: 'gender',
       key: 'gender',
+      sorter: (a, b) => a.gender.localeCompare(b.gender)
     },
     {
-      title: 'Selected Program',
+      title: 'Program',
       dataIndex: 'selectedProgram',
       key: 'selectedProgram',
     },
@@ -107,22 +121,29 @@ export const NestedTable = () => {
     columns = [
       {
         title: 'ID',dataIndex: 'id',key: 'id',
-        sorter: {compare: (a, b) => a.id - b.id,},
       },  
       {
         title: 'First Name',dataIndex: 'firstName',key: 'firstName',
-        sorter: {compare: (a, b) => a.firstName - b.firstName,},
+        sorter: (a, b) => a.firstName.localeCompare(b.firstName),
       },  
       {
         title: 'Last Name',dataIndex: 'lastName',key: 'lastName',
-        sorter: {compare: (a, b) => a.lastName - b.lastName,},
       },  
       {
         title: 'Email Address',dataIndex: 'email',key: 'email',
-        sorter: {compare: (a, b) => a.email - b.email,},
+        sorter: (a, b) => a.email.localeCompare(b.email),
+      },  
+      {
+        title: 'DOB',dataIndex: 'dob',key: 'dob',
+        sorter: {compare: (a, b) => a.dob - b.dob,},
+      },  
+      {
+        title: 'Age',dataIndex: 'age',key: 'age',
+        sorter: {compare: (a, b) => a.age - b.age,},
       },  
       {
         title: 'Gender',dataIndex: 'gender',key: 'gender',
+        sorter: (a, b) => a.gender.localeCompare(b.gender),
       },  
       {
         title: 'Phone Number',dataIndex: 'phoneNumber',key: 'phoneNumber',
@@ -132,7 +153,7 @@ export const NestedTable = () => {
       },  
       {
         title: 'City / State',dataIndex: 'city',key: 'city',
-        sorter: {compare: (a, b) => a.city - b.city,},
+        sorter: (a, b) => a.city.localeCompare(b.city),
       },  
       {
         title: 'ZipCode',dataIndex: 'zipCode',key: 'firstName',
@@ -145,19 +166,16 @@ export const NestedTable = () => {
       columns = [
         {
           title: 'ID',dataIndex: 'id',key: 'id',
-          sorter: {compare: (a, b) => a.id - b.id,},
         },  
         {
           title: 'First Name',dataIndex: 'firstName',key: 'firstName',
-          sorter: {compare: (a, b) => a.firstName - b.firstName,},
+          sorter: (a, b) => a.firstName.localeCompare(b.firstName),
         },  
         {
           title: 'Last Name',dataIndex: 'lastName',key: 'lastName',
-          sorter: {compare: (a, b) => a.lastName - b.lastName,},
         },  
         {
           title: 'Email Address',dataIndex: 'email',key: 'email',
-          sorter: {compare: (a, b) => a.email - b.email,},
         },  
         {
           title: 'Phone Number',dataIndex: 'phoneNumber',key: 'phoneNumber',
@@ -167,13 +185,14 @@ export const NestedTable = () => {
         },  
         {
           title: 'City / State',dataIndex: 'city',key: 'city',
-          sorter: {compare: (a, b) => a.city - b.city,},
+          sorter: (a, b) => a.city.localeCompare(b.city),
         },  
         {
           title: 'ZipCode',dataIndex: 'zipCode',key: 'firstName',
         },  
         {
           title: 'Kids',dataIndex: 'kids',key: 'kids',
+          sorter: {compare: (a, b) => a.kids - b.kids,}
         },  
       ]
     }
@@ -184,11 +203,10 @@ export const NestedTable = () => {
         },  
         {
           title: 'Name',dataIndex: 'name',key: 'name',
-          sorter: {compare: (a, b) => a.firstName - b.firstName,},
+          sorter: (a, b) => a.name.localeCompare(b.name),
         },  
         {
           title: 'Email Address',dataIndex: 'email',key: 'email',
-          sorter: {compare: (a, b) => a.firstName - b.firstName,},
         },  
       ]
     }
@@ -199,7 +217,7 @@ export const NestedTable = () => {
         },  
         {
           title: 'Username',dataIndex: 'username',key: 'username',
-          sorter: {compare: (a, b) => a.username - b.username,},
+          sorter: (a, b) => a.username.localeCompare(b.username),
         },  
         {
           title: 'Password',dataIndex: 'password',key: 'password',
@@ -220,21 +238,31 @@ export const NestedTable = () => {
   const processedData = dataSource.map(({ children, ...rest }) => rest);
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      setSelectedRows(selectedRows.map((key,_)=>key.email))
+      // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
     },
     onSelect: (record, selected, selectedRows) => {
-      console.log(record, selected, selectedRows);
+      setSelectedRows(selectedRows)
+      // console.log(record, selected, selectedRows);
     },
     onSelectAll: (selected, selectedRows, changeRows) => {
-      console.log(selected, selectedRows, changeRows);
+      setSelectedRows(selectedRows)
+      // console.log(selected, selectedRows, changeRows);
     },
   };
+  console.log(selectedRows);
+  
   return(
     <>
+      <SendEmail emailAddress={selectedRows}/>
       {isApplication==="users"
-        && 
+        ?
           <Button style={{width:"fit-content"}} variant="outlined" onClick={handleClickOpen}>
             Add new user
+          </Button>
+          :      
+          <Button style={{width:"fit-content"}} variant="outlined" onClick={handleClickOpenEmail}>
+            Send E-mail
           </Button>      
         }
       <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>

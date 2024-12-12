@@ -32,6 +32,8 @@ aside.sidenav {
       align-items: center;
       gap: 15px;
       cursor: pointer;
+      padding: 5px;
+      border-radius: 10px;
       .icon{
         // background-color: #1f3a5f;
         background-color: #1f2b3e;
@@ -45,6 +47,9 @@ aside.sidenav {
       }
       .link{
         font-size:14px ;
+      }
+      &.active {
+        background-color:#1f2b3e ;
       }
     }
   }

@@ -8,18 +8,20 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { AppContext } from '../Context/getData';
 import axios from 'axios';
-export const AddUsers = () => {
-  const {handleClose, open, getUsersData,openNotificationWithIcon} = useContext(AppContext)
-  const [username, setUsername] = useState()
-  const [password, setPassword] = useState()
+export const SendEmail = (props) => {
+  const { emailAddress } = props;
+  const {handleCloseEmail, openEmail, getUsersData,openNotificationWithIcon} = useContext(AppContext)
+  const [emailMessage, setEmailMessage] = useState('')
+  const [emailSubject, setEmailSubject] = useState('')
   const token = localStorage.getItem('token');
-  const handleUsersSubmit = async () => {
-    let userData = { username, password};
-    if (!username || !password) {
-      return openNotificationWithIcon('error', 'Failed Operation', 'Please check the consent');
+  const handleEmailSubmit = async () => {
+    const data = {emailMessage,emailAddress,emailSubject}
+    console.log(data);
+    if (!data) {
+      return openNotificationWithIcon('error', 'Failed Operation', 'Please fill the data');
     }
-    await axios.post('https://al-arqam-banckend.vercel.app/api/users',
-      userData,
+    await axios.post('https://al-arqam-banckend.vercel.app/api/send-email',
+      data,
       {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -29,17 +31,20 @@ export const AddUsers = () => {
     )
     .then((response)=>{
       getUsersData()
-      handleClose()
-      openNotificationWithIcon('Success', 'Success Operation', 'User has been created')
+      handleCloseEmail()
+      openNotificationWithIcon('success', 'Success Operation', 'Email sent')
       console.log("Request succeeded:", response);
     })
-    .catch((error)=>{console.error("Request failed:", error.response?.data || error.message);})
+    .catch((error)=>{
+      openNotificationWithIcon('error', 'Failed Operation', 'Please fill the data')
+      console.error("Request failed:", error.response?.data || error.message);
+    })
   };
   return (
     <>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={openEmail}
+        onClose={handleCloseEmail}
         PaperProps={{
           component: 'form',
           onSubmit: (event) => {
@@ -48,43 +53,43 @@ export const AddUsers = () => {
             const formJson = Object.fromEntries(formData.entries());
             const email = formJson.email;
             console.log(email);
-            handleClose();
+            handleCloseEmail();
           },
         }}
       >
-        <DialogTitle>Create New User</DialogTitle>
+        <DialogTitle>Send Email</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To create new user to this dashboard, please enter your username and password
+            To send an e-mail to this person , please enter your message here.
           </DialogContentText>
           <TextField
             autoFocus
             required
             margin="dense"
-            id="username"
-            name="username"
-            label="username"
+            id="emailMessage"
+            name="emailMessage"
+            label="Your Message"
             type="text"
             fullWidth
             variant="standard"
-            onChange={(e)=>{setUsername(e.target.value)}}
+            onChange={(e)=>{setEmailMessage(e.target.value)}}
           />
           <TextField
             autoFocus
             required
             margin="dense"
-            id="password"
-            name="password"
-            label="password"
-            type="password"
+            id="emailSubject"
+            name="emailSubject"
+            label="Your email subject"
+            type="text"
             fullWidth
             variant="standard"
-            onChange={(e)=>{setPassword(e.target.value)}}
+            onChange={(e)=>{setEmailSubject(e.target.value)}}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleUsersSubmit}>Create User</Button>
+          <Button onClick={handleCloseEmail}>Cancel</Button>
+          <Button onClick={handleEmailSubmit}>Send</Button>
         </DialogActions>
       </Dialog>
     </>
