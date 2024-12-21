@@ -6,13 +6,13 @@ const AppProvider = ({ children }) => {
   useEffect(()=>{
     getStudentApplicationsData()
   },[]);
-  const token = localStorage.getItem('token');
   const [applicationsData, setApplicationsData] = useState();
   const [isApplication, setIsApplication] = useState("studentApplications");
   const [isParent, setIsParent] = useState(true);
   const [open, setOpen] = useState(false);
   const [openEmail, setOpenEmail] = useState(false);
   const [api, contextHolder] = notification.useNotification();
+  const token = localStorage.getItem('token');
   const openNotificationWithIcon = (type, message, description) => {
     api[type]({
       message,

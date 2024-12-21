@@ -12,7 +12,7 @@ export const AddUsers = () => {
   const {handleClose, open, getUsersData,openNotificationWithIcon} = useContext(AppContext)
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
-  const token = localStorage.getItem('vercel-toolbar-token');
+  const token = localStorage.getItem('token');
   const handleUsersSubmit = async () => {
     let userData = { username, password};
     if (!username || !password) {

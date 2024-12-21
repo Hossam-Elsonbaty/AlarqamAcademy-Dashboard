@@ -13,7 +13,7 @@ export const SendEmail = (props) => {
   const {handleCloseEmail, openEmail, getUsersData,openNotificationWithIcon} = useContext(AppContext)
   const [emailMessage, setEmailMessage] = useState('')
   const [emailSubject, setEmailSubject] = useState('')
-  const token = localStorage.getItem('vercel-toolbar-token');
+  const token = localStorage.getItem('token');
   const handleEmailSubmit = async () => {
     const data = {emailMessage,emailAddress,emailSubject}
     console.log(data);
