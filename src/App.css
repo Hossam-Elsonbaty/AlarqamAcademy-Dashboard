@@ -234,6 +234,11 @@ body {
   border-radius: 0px; /* roundness of the scrollbar */
 }
 
+.delete-btn {
+  background-color: #aa0000 !important;
+  color: #fff !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;/*# sourceMappingURL=App.css.map */

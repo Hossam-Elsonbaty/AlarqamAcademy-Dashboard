@@ -5,7 +5,7 @@ import { ConfigProvider, theme,Table } from 'antd';
 import {SendEmail} from './SendEmail';
 export const NestedTable = () => {
   const [selectedRows, setSelectedRows] = useState([])
-  const {isApplication, isParent, handleClickOpen, applicationsData, handleClickOpenEmail} = useContext(AppContext);
+  const {isApplication, isParent, handleClickOpen, getUsersData, applicationsData, handleClickOpenEmail} = useContext(AppContext);
   console.log(isParent)
   const items = [
     {
@@ -17,6 +17,29 @@ export const NestedTable = () => {
       label: 'Action 2',
     },
   ];
+  const token = localStorage.getItem('token');
+  const deleteUser = async (userId) => {
+    console.log(userId);
+    
+    const url = `https://al-arqam-banckend.vercel.app/api/users/${userId}`;
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE', // HTTP method for deletion
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json(); // Parse the JSON response
+      console.log('User deleted successfully:', data);
+      getUsersData()
+    } catch (error) {
+      console.error('Error deleting user:', error.message);
+    }
+  };
   const dataSource = Array.isArray(applicationsData) 
   ? applicationsData.map((key) => {
     const calculateAge = (dob) => {
@@ -123,11 +146,11 @@ export const NestedTable = () => {
         title: 'ID',dataIndex: 'id',key: 'id',
       },  
       {
-        title: 'First Name',dataIndex: 'firstName',key: 'firstName',
+        title: 'First Name',dataIndex: 'firstName',minWidth:130,key: 'firstName',
         sorter: (a, b) => a.firstName.localeCompare(b.firstName),
       },  
       {
-        title: 'Last Name',dataIndex: 'lastName',key: 'lastName',
+        title: 'Last Name',dataIndex: 'lastName',minWidth:130,key: 'lastName',
       },  
       {
         title: 'Email Address',dataIndex: 'email',key: 'email',
@@ -138,28 +161,28 @@ export const NestedTable = () => {
         sorter: {compare: (a, b) => a.dob - b.dob,},
       },  
       {
-        title: 'Age',dataIndex: 'age',key: 'age',
+        title: 'Age',dataIndex: 'age',minWidth:130,key: 'age',
         sorter: {compare: (a, b) => a.age - b.age,},
       },  
       {
-        title: 'Gender',dataIndex: 'gender',key: 'gender',
+        title: 'Gender',dataIndex: 'gender',minWidth:130,key: 'gender',
         sorter: (a, b) => a.gender.localeCompare(b.gender),
       },  
       {
-        title: 'Phone Number',dataIndex: 'phoneNumber',key: 'phoneNumber',
+        title: 'Phone Number',dataIndex: 'phoneNumber',minWidth:140,key: 'phoneNumber',
       },  
       {
-        title: 'Address',dataIndex: 'address',key: 'address',
+        title: 'Address',minWidth:130,dataIndex: 'address',key: 'address',
       },  
       {
-        title: 'City / State',dataIndex: 'city',key: 'city',
+        title: 'City / State',minWidth:130,dataIndex: 'city',key: 'city',
         sorter: (a, b) => a.city.localeCompare(b.city),
       },  
       {
-        title: 'ZipCode',dataIndex: 'zipCode',key: 'firstName',
+        title: 'ZipCode',dataIndex: 'zipCode',minWidth:130,key: 'firstName',
       },  
       {
-        title: 'Program',dataIndex: 'selectedProgram',key: 'selectedProgram',
+        title: 'Program',dataIndex: 'selectedProgram',minWidth:130,key: 'selectedProgram',
       },  
     ]}
     else if (isApplication=== "parentApplications"){
@@ -168,27 +191,27 @@ export const NestedTable = () => {
           title: 'ID',dataIndex: 'id',key: 'id',
         },  
         {
-          title: 'First Name',dataIndex: 'firstName',key: 'firstName',
+          title: 'First Name',textWrap: 'word-break',minWidth:130,dataIndex: 'firstName',key: 'firstName',
           sorter: (a, b) => a.firstName.localeCompare(b.firstName),
         },  
         {
-          title: 'Last Name',dataIndex: 'lastName',key: 'lastName',
+          title: 'Last Name',dataIndex: 'lastName',minWidth:120,key: 'lastName',
         },  
         {
           title: 'Email Address',dataIndex: 'email',key: 'email',
         },  
         {
-          title: 'Phone Number',dataIndex: 'phoneNumber',key: 'phoneNumber',
+          title: 'Phone Number',dataIndex: 'phoneNumber',minWidth:140,key: 'phoneNumber',
         },  
         {
           title: 'Address',dataIndex: 'address',key: 'address',
         },  
         {
-          title: 'City / State',dataIndex: 'city',key: 'city',
+          title: 'City / State',dataIndex: 'city',minWidth:130,key: 'city',
           sorter: (a, b) => a.city.localeCompare(b.city),
         },  
         {
-          title: 'ZipCode',dataIndex: 'zipCode',key: 'firstName',
+          title: 'ZipCode',dataIndex: 'zipCode',minWidth:100,key: 'firstName',
         },  
         {
           title: 'Kids',dataIndex: 'kids',key: 'kids',
@@ -216,12 +239,25 @@ export const NestedTable = () => {
           title: 'ID',dataIndex: 'id',key: 'id',
         },  
         {
-          title: 'Username',dataIndex: 'username',key: 'username',
+          title: 'Username',minWidth:130,dataIndex: 'username',key: 'username',
           sorter: (a, b) => a.username.localeCompare(b.username),
         },  
         {
           title: 'Password',dataIndex: 'password',key: 'password',
         },  
+        {
+          title: 'Actions', // Add a new column for actions
+          key: 'actions',
+          render: (text, record) => (
+            <Button
+              type="primary"
+              onClick={() => deleteUser(record.id)}
+              className='delete-btn'
+            >
+              Delete
+            </Button>
+          ),
+        },
       ]
     }
   const expandedRowRender = (record) => {
@@ -282,9 +318,10 @@ export const NestedTable = () => {
           pagination={{
             pageSize: 10,
           }}
+          tableLayout="auto"
           scroll={{
             y: 85 * 5,
-            x: 2000,
+            x: "auto",
           }}
         />
       </ConfigProvider>
