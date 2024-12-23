@@ -24,7 +24,7 @@ export const Login = () => {
         localStorage.setItem('token', data.token);
         console.log('Login successful');
         getStudentApplicationsData()
-        navigate("/dashboard", { replace: true });
+        navigate("/", { replace: true });
       } else {
         console.log(data.message || 'Login failed');
         openNotificationWithIcon('error', 'Failed Operation', 'Invalid username or password');
