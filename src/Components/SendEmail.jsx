@@ -10,7 +10,7 @@ import { AppContext } from '../Context/getData';
 import axios from 'axios';
 export const SendEmail = (props) => {
   const { emailAddress } = props;
-  const {handleCloseEmail, openEmail, getUsersData,openNotificationWithIcon} = useContext(AppContext)
+  const {handleCloseEmail, openEmail,openNotificationWithIcon} = useContext(AppContext)
   const [emailMessage, setEmailMessage] = useState('')
   const [emailSubject, setEmailSubject] = useState('')
   const token = localStorage.getItem('token');
@@ -24,13 +24,12 @@ export const SendEmail = (props) => {
       data,
       {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       }
     )
     .then((response)=>{
-      getUsersData()
       handleCloseEmail()
       openNotificationWithIcon('success', 'Success Operation', 'Email sent')
       console.log("Request succeeded:", response);

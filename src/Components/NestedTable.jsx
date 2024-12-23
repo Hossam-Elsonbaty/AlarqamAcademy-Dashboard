@@ -225,7 +225,7 @@ export const NestedTable = () => {
           title: 'ID',dataIndex: 'id',key: 'id',
         },  
         {
-          title: 'Name',dataIndex: 'name',key: 'name',
+          title: 'Name',minWidth:130,dataIndex: 'name',key: 'name',
           sorter: (a, b) => a.name.localeCompare(b.name),
         },  
         {
@@ -287,7 +287,6 @@ export const NestedTable = () => {
     },
   };
   console.log(selectedRows);
-  
   return(
     <>
       <SendEmail emailAddress={selectedRows}/>
