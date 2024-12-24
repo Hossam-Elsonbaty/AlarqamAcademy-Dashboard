@@ -7,16 +7,6 @@ export const NestedTable = () => {
   const [selectedRows, setSelectedRows] = useState([])
   const {isApplication, isParent, handleClickOpen, getUsersData, applicationsData, handleClickOpenEmail} = useContext(AppContext);
   console.log(isParent)
-  const items = [
-    {
-      key: '1',
-      label: 'Action 1',
-    },
-    {
-      key: '2',
-      label: 'Action 2',
-    },
-  ];
   const token = localStorage.getItem('token');
   const deleteUser = async (userId) => {
     console.log(userId);
