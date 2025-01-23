@@ -1,14 +1,11 @@
 main.home{
   width: 100%;
   display: flex;
-  section.left-section{
-    width: 20%;
-  }
   section.right-section{
     width: 80%;
     padding: 4rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 2rem;
   }
 }

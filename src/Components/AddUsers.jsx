@@ -12,13 +12,14 @@ export const AddUsers = () => {
   const {handleClose, open, getUsersData,openNotificationWithIcon} = useContext(AppContext)
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
+  const isSuperuser = false
   const token = localStorage.getItem('token');
   const handleUsersSubmit = async () => {
-    let userData = { username, password};
+    let userData = { username, password, isSuperuser};
     if (!username || !password) {
       return openNotificationWithIcon('error', 'Failed Operation', 'Please check the consent');
     }
-    await axios.post('https://al-arqam-banckend.vercel.app/api/users',
+    await axios.post('http://localhost:5555/api/users',
       userData,
       {
         headers: {

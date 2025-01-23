@@ -1,0 +1,67 @@
+@mixin breakpoint ($point) {
+  @if $point == desktop {
+    @media (min-width : 768px ){
+      @content ;
+    }
+  } @else if $point == mobile {
+    @media (max-width : 760px ){
+      @content ;
+    }
+  } @else if $point == medium {
+    @media (min-width : 761px ) and (max-width : 1440px ){
+      @content ;
+    }
+  } @else if $point == large {
+    @media (min-width : 1400px ){
+      @content ;
+    }
+  }@else if $point == notMobile {
+    @media (min-width : 767 ) and (max-width : 1599px ) {
+      @content
+    }
+  }
+}
+@mixin header() {
+  color: #1C2D49;
+  font-size: 26px;
+  font-weight: 600;
+  width: fit-content;
+  position: relative;
+  span{
+    position: absolute;
+    width: 123.41px;
+    height: 2px;
+    right: .5rem;
+    @content;
+    top: 42px;
+    background-color: #286982;
+    transform: rotate(-2.04deg);
+    &:last-child{
+      width: 68px;
+      top: 50px;
+      right: 4rem;
+      @content;
+    }
+  }
+}
+@mixin h1() {
+  color: #1C2D49;
+  font-size: 26px;
+  font-weight: 600;
+  width: fit-content;
+  position: relative;
+  img{
+    position: absolute;
+    right: 0;
+    bottom: -12px;
+    @content
+  }
+}
+@mixin button() {
+  background-color: #286982;
+  border-radius: 15px;
+  padding: 7px 2rem;
+  color: #fff;
+  font-size: 18px;
+  @content
+}

@@ -10,7 +10,7 @@ export const Home = () => {
     <main className='home'>
       {contextHolder}
       <AddUsers/>
-      <section className='left-section'><Sidebar/></section>
+      <Sidebar/>
       <section className='right-section'>
         <Statics/>
         <NestedTable/>

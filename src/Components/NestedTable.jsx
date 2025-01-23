@@ -5,13 +5,13 @@ import { ConfigProvider, theme,Table } from 'antd';
 import {SendEmail} from './SendEmail';
 export const NestedTable = () => {
   const [selectedRows, setSelectedRows] = useState([])
-  const {isApplication, isParent, handleClickOpen, getUsersData, applicationsData, handleClickOpenEmail} = useContext(AppContext);
+  const {isApplication, isParent, handleClickOpen, getUsersData,
+        applicationsData, handleClickOpenEmail} = useContext(AppContext);
   console.log(isParent)
   const token = localStorage.getItem('token');
   const deleteUser = async (userId) => {
     console.log(userId);
-    
-    const url = `https://al-arqam-banckend.vercel.app/api/users/${userId}`;
+    const url = `http://localhost:5555/api/users/${userId}`;
     try {
       const response = await fetch(url, {
         method: 'DELETE', // HTTP method for deletion
@@ -88,11 +88,24 @@ export const NestedTable = () => {
           message: key.message,
           email: key.email,
         };
-      } else if (isApplication === "users") {
+      } 
+      else if (isApplication === "users") {
         return {
           id: key._id,
           username: key.username,
           password: key.password,
+        };
+      }
+      else if (isApplication === "donations") {
+        return {
+          id: key._id,
+          customerId: key.customerId,
+          subscriptionId: key.subscriptionId,
+          name: key.metadata.name,
+          email: key.metadata.email,
+          phone: key.metadata.phone,
+          amount: key.amount,
+          status: key.status,
         };
       }
       return null; // For any unmatched case
@@ -133,7 +146,7 @@ export const NestedTable = () => {
   if(isApplication=== "studentApplications"){
     columns = [
       {
-        title: 'ID',dataIndex: 'id',key: 'id',
+        title: 'ID',dataIndex: 'id',key: 'id',hidden:true
       },  
       {
         title: 'First Name',dataIndex: 'firstName',minWidth:130,key: 'firstName',
@@ -178,7 +191,7 @@ export const NestedTable = () => {
     else if (isApplication=== "parentApplications"){
       columns = [
         {
-          title: 'ID',dataIndex: 'id',key: 'id',
+          title: 'ID',dataIndex: 'id',key: 'id',hidden:true
         },  
         {
           title: 'First Name',textWrap: 'word-break',minWidth:130,dataIndex: 'firstName',key: 'firstName',
@@ -212,7 +225,7 @@ export const NestedTable = () => {
     else if (isApplication=== "contactUs"){
       columns = [
         {
-          title: 'ID',dataIndex: 'id',key: 'id',
+          title: 'ID',dataIndex: 'id',key: 'id',hidden:true
         },  
         {
           title: 'Name',minWidth:130,dataIndex: 'name',key: 'name',
@@ -226,7 +239,7 @@ export const NestedTable = () => {
     else if (isApplication=== "users"){
       columns = [
         {
-          title: 'ID',dataIndex: 'id',key: 'id',
+          title: 'ID',dataIndex: 'id',key: 'id',hidden:true
         },  
         {
           title: 'Username',minWidth:130,dataIndex: 'username',key: 'username',
@@ -248,6 +261,49 @@ export const NestedTable = () => {
             </Button>
           ),
         },
+      ]
+    }
+    else if (isApplication === "donations"){
+      columns = [
+        {
+          title: 'ID',dataIndex: 'id',key: 'id',hidden:true
+        },  
+        {
+          title: 'Customer Id',dataIndex: 'customerId',key: 'customerId',hidden:true,
+          sorter: (a, b) => a.customerId.localeCompare(b.customerId),
+        },  
+        {
+          title: 'Subscription Id',dataIndex: 'subscriptionId',key: 'subscriptionId',hidden:true
+        },  
+        {
+          title: 'Name', dataIndex: 'name',key: 'name',
+        },  
+        {
+          title: 'email',dataIndex: 'email',key: 'email',
+        },  
+        {
+          title: 'Phone Number',dataIndex: 'phone',key: 'phone',
+        },  
+        {
+          title: 'Amount',dataIndex: 'amount',key: 'amount',
+        },  
+        {
+          title: 'Status', dataIndex: 'status',key: 'status',
+        },  
+        // {
+        //   title: 'Actions', // Add a new column for actions
+        //   key: 'actions',
+        //   render: (text, record) => (
+        //     <Button
+        //       type="primary"
+        //       onClick={() => deleteUser(record.id)}
+        //       className='delete-btn'
+        //     >
+        //       Delete
+        //     </Button>
+        //   ),
+        // },
+        
       ]
     }
   const expandedRowRender = (record) => {
@@ -293,6 +349,7 @@ export const NestedTable = () => {
       <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
         <Table
           columns={columns}
+          tableLayout="auto"
           expandable={isParent?
             {
               expandedRowRender,
@@ -307,7 +364,6 @@ export const NestedTable = () => {
           pagination={{
             pageSize: 10,
           }}
-          tableLayout="auto"
           scroll={{
             y: 85 * 5,
             x: "auto",

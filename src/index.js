@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
-import App from './App';
+import MainApp from './App';
+import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AppProvider } from "./Context/getData";
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const darkTheme = createTheme({
   palette: {
@@ -16,12 +16,14 @@ const darkTheme = createTheme({
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline/>
-      <AppProvider>
-        <App />
-      </AppProvider>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline/>
+        <AppProvider>
+          <MainApp />
+        </AppProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
