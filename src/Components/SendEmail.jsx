@@ -32,11 +32,9 @@ export const SendEmail = (props) => {
     .then((response)=>{
       handleCloseEmail()
       openNotificationWithIcon('success', 'Success Operation', 'Email sent')
-      console.log("Request succeeded:", response);
     })
     .catch((error)=>{
       openNotificationWithIcon('error', 'Failed Operation', 'Please fill the data')
-      console.error("Request failed:", error.response?.data || error.message);
     })
   };
   return (

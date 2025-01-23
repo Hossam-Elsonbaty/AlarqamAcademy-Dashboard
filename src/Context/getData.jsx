@@ -36,31 +36,27 @@ const AppProvider = ({ children }) => {
         navigate('/login', {replace: true});
       }
     } else {
-      console.log(error.message);
+      return error.message
     }
   };
   const handleClickOpen = () => {
     setOpen(true);
-    console.log("open");
   };
   const handleClickOpenEmail = () => {
     setOpenEmail(true);
-    console.log("open-email");
   };
   const handleCloseEmail = () => {
     setOpenEmail(false);
-    console.log("close-email");
   };
   const handleClose = () => {
     setOpen(false);
   };
   const getStatics = async ()=> {
     try {
-      const res = await axios.get('http://localhost:5555/api/statics', {
+      const res = await axios.get('https://al-arqam-banckend.vercel.app/api/statics', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setStatics(res.data);
-      console.log(res.data);
     } catch (err) {
       handleUnauthorizedError(err);
     }
@@ -71,7 +67,6 @@ const AppProvider = ({ children }) => {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setApplicationsData(res.data);
-      console.log(res.data);
     } catch (err) {
       handleUnauthorizedError(err);
     }
@@ -82,7 +77,6 @@ const AppProvider = ({ children }) => {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setApplicationsData(res.data);
-      console.log(res.data);
     } catch (err) {
       handleUnauthorizedError(err);
     }
@@ -93,31 +87,28 @@ const AppProvider = ({ children }) => {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setApplicationsData(res.data);
-      console.log(res.data);
     } catch (err) {
       handleUnauthorizedError(err);
     }
   };
   const getUsersData = async () => {
     try {
-      const res = await axios.get('http://localhost:5555/api/users', {
+      const res = await axios.get('https://al-arqam-banckend.vercel.app/api/users', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setApplicationsData(res.data);
-      console.log(res.data);
     } catch (err) {
       handleUnauthorizedError(err);
     }
   };
   const getDonationsData = async (type) => {
     try {
-      const res = await axios.get('http://localhost:5555/api/transactions', {
+      const res = await axios.get('https://al-arqam-banckend.vercel.app/api/transactions', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if(type){
         setApplicationsData(res.data.filter(ele=>ele.customerId===undefined))
       }else{setApplicationsData(res.data.filter(ele=>ele.customerId))}
-      console.log(res.data);
     } catch (err) {
       handleUnauthorizedError(err);
     }

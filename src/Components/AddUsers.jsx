@@ -19,7 +19,7 @@ export const AddUsers = () => {
     if (!username || !password) {
       return openNotificationWithIcon('error', 'Failed Operation', 'Please check the consent');
     }
-    await axios.post('http://localhost:5555/api/users',
+    await axios.post('https://al-arqam-banckend.vercel.app/api/users',
       userData,
       {
         headers: {
@@ -32,9 +32,10 @@ export const AddUsers = () => {
       getUsersData()
       handleClose()
       openNotificationWithIcon('Success', 'Success Operation', 'User has been created')
-      console.log("Request succeeded:", response);
     })
-    .catch((error)=>{console.error("Request failed:", error.response?.data || error.message);})
+    .catch((error)=>{
+      return error.response?.data || error.message
+    })
   };
   return (
     <>

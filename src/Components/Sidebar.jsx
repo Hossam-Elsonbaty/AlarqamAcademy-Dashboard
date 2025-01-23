@@ -41,7 +41,6 @@ export const Sidebar = () => {
   }
   const handleLogout = () => {
     localStorage.removeItem('token');
-    console.log('Logged out successfully');
     window.location.href = `${window.location.origin}/login`
   };
   const items = [

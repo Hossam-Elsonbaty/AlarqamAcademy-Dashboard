@@ -12,7 +12,7 @@ export const Login = () => {
     e.preventDefault();
     //https://al-arqam-banckend.vercel.app/api/login
     try {
-      const response = await fetch('http://localhost:5555/api/login', {
+      const response = await fetch('https://al-arqam-banckend.vercel.app/api/login', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -23,15 +23,12 @@ export const Login = () => {
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        console.log('Login successful');
         getStudentApplicationsData()
         navigate("/", { replace: true });
       } else {
-        console.log(data.message || 'Login failed');
         openNotificationWithIcon('error', 'Failed Operation', 'Invalid username or password');
       }
     } catch (error) {
-      console.error('Error:', error);
       openNotificationWithIcon('error', 'Failed Operation', 'Invalid username or password');
     }
   };

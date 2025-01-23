@@ -6,7 +6,6 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     console.log('Token:', token);
     if (!token) {
-      console.log('Navigating to login...');
       navigate('/', {replace: true});
     }
   }, [token, navigate]); // Run this effect when token or navigate changes

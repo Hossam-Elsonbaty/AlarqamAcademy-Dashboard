@@ -11,7 +11,7 @@ export const NestedTable = () => {
   const token = localStorage.getItem('token');
   const deleteUser = async (userId) => {
     console.log(userId);
-    const url = `http://localhost:5555/api/users/${userId}`;
+    const url = `https://al-arqam-banckend.vercel.app/api/users/${userId}`;
     try {
       const response = await fetch(url, {
         method: 'DELETE', // HTTP method for deletion
@@ -24,10 +24,8 @@ export const NestedTable = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json(); // Parse the JSON response
-      console.log('User deleted successfully:', data);
       getUsersData()
     } catch (error) {
-      console.error('Error deleting user:', error.message);
     }
   };
   const dataSource = Array.isArray(applicationsData) 
