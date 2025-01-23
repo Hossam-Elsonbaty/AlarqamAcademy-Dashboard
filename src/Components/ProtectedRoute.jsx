@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom";
 import React,{ useEffect } from "react";
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token =  localStorage.getItem('token');
   useEffect(() => {
-    console.log('Token:', token);
+    console.log(token);
     if (!token) {
-      navigate('/', {replace: true});
+      navigate('/login', {replace: true});
     }
   }, [token, navigate]); // Run this effect when token or navigate changes
-  return token ? children : <div>Redirecting to login...</div>; // Render children if token exists, otherwise render nothing
+  return token ? children : console.log("Login Failed") // Render children if token exists, otherwise render nothing
 };
 export default ProtectedRoute;

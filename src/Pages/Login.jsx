@@ -3,20 +3,18 @@ import { AiOutlineLogin } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import {AppContext} from '../Context/getData'
 export const Login = () => {
-  const token = localStorage.getItem('token');
   const {getStudentApplicationsData,openNotificationWithIcon,contextHolder} = useContext(AppContext)
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
-    //https://al-arqam-banckend.vercel.app/api/login
+    // https://al-arqam-banckend.vercel.app/api/login
     try {
-      const response = await fetch('https://al-arqam-banckend.vercel.app/api/login', {
+      const response = await fetch('http://localhost:5555/api/login', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ username, password }),
       });

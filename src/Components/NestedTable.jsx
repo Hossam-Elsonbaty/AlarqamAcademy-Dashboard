@@ -29,7 +29,7 @@ export const NestedTable = () => {
     }
   };
   const dataSource = Array.isArray(applicationsData) 
-  ? applicationsData.map((key) => {
+  ? applicationsData && applicationsData.map((key) => {
     const calculateAge = (dob) => {
       if (!dob) return null; // Handle cases where DOB is not provided
       const birthDate = new Date(dob);
