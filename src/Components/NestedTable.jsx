@@ -7,7 +7,6 @@ export const NestedTable = () => {
   const [selectedRows, setSelectedRows] = useState([])
   const {isApplication, isParent, handleClickOpen, getUsersData,
         applicationsData, handleClickOpenEmail} = useContext(AppContext);
-  console.log(isParent)
   const token = localStorage.getItem('token');
   const deleteUser = async (userId) => {
     console.log(userId);
@@ -29,7 +28,7 @@ export const NestedTable = () => {
     }
   };
   const dataSource = Array.isArray(applicationsData) 
-  ? applicationsData && applicationsData.map((key) => {
+  ? applicationsData.map((key) => {
     const calculateAge = (dob) => {
       if (!dob) return null; // Handle cases where DOB is not provided
       const birthDate = new Date(dob);
@@ -99,9 +98,9 @@ export const NestedTable = () => {
           id: key._id,
           customerId: key.customerId,
           subscriptionId: key.subscriptionId,
-          name: key.metadata.name,
-          email: key.metadata.email,
-          phone: key.metadata.phone,
+          name: key.metadata?.name,
+          email: key.metadata?.email,
+          phone: key.metadata?.phone,
           amount: key.amount,
           status: key.status,
         };
@@ -330,7 +329,6 @@ export const NestedTable = () => {
       // console.log(selected, selectedRows, changeRows);
     },
   };
-  console.log(selectedRows);
   return(
     <>
       <SendEmail emailAddress={selectedRows}/>
