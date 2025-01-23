@@ -11,7 +11,7 @@ export const Login = () => {
     e.preventDefault();
     // https://al-arqam-banckend.vercel.app/api/login
     try {
-      const response = await fetch('http://localhost:5555/api/login', {
+      const response = await fetch('https://al-arqam-banckend.vercel.app/api/login', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
