@@ -34,6 +34,7 @@ export const AddUsers = () => {
       openNotificationWithIcon('Success', 'Success Operation', 'User has been created')
     })
     .catch((error)=>{
+      openNotificationWithIcon('Fail', 'Fail Operation', 'Please Sure the data')
       return error.response?.data || error.message
     })
   };

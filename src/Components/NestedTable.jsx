@@ -312,14 +312,14 @@ export const NestedTable = () => {
   };
   return(
     <>
-      <SendEmail emailAddress={selectedRows}/>
+      <SendEmail emailAddress={selectedRows} disabled/>
       {isApplication==="users"
         ?
-          <Button style={{width:"fit-content"}} variant="outlined" onClick={handleClickOpen}>
+          <Button disabled style={{width:"fit-content"}} variant="outlined" onClick={handleClickOpen}>
             Add new user
           </Button>
           :      
-          <Button style={{width:"fit-content"}} variant="outlined" onClick={handleClickOpenEmail}>
+          <Button disabled= {selectedRows.length<1? true: false} style={{width:"fit-content"}} variant="outlined" onClick={handleClickOpenEmail}>
             Send E-mail
           </Button>      
         }
