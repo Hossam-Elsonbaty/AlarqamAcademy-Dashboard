@@ -9,7 +9,6 @@ export const NestedTable = () => {
         applicationsData, handleClickOpenEmail} = useContext(AppContext);
   const token = localStorage.getItem('token');
   const deleteUser = async (userId) => {
-    console.log(userId);
     const url = `https://al-arqam-banckend.vercel.app/api/users/${userId}`;
     try {
       const response = await fetch(url, {
@@ -108,7 +107,6 @@ export const NestedTable = () => {
       return null; // For any unmatched case
     }).filter(Boolean) // Remove null entries
   : [];
-  console.log(dataSource);
   const expandColumns = [
     {
       title: 'First Name',
@@ -287,20 +285,6 @@ export const NestedTable = () => {
         {
           title: 'Status', dataIndex: 'status',key: 'status',
         },  
-        // {
-        //   title: 'Actions', // Add a new column for actions
-        //   key: 'actions',
-        //   render: (text, record) => (
-        //     <Button
-        //       type="primary"
-        //       onClick={() => deleteUser(record.id)}
-        //       className='delete-btn'
-        //     >
-        //       Delete
-        //     </Button>
-        //   ),
-        // },
-        
       ]
     }
   const expandedRowRender = (record) => {
@@ -318,15 +302,12 @@ export const NestedTable = () => {
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows.map((key,_)=>key.email))
-      // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
     },
     onSelect: (record, selected, selectedRows) => {
       setSelectedRows(selectedRows)
-      // console.log(record, selected, selectedRows);
     },
     onSelectAll: (selected, selectedRows, changeRows) => {
       setSelectedRows(selectedRows)
-      // console.log(selected, selectedRows, changeRows);
     },
   };
   return(

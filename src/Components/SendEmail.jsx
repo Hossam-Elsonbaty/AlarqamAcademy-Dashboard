@@ -16,7 +16,6 @@ export const SendEmail = (props) => {
   const token = localStorage.getItem('token');
   const handleEmailSubmit = async () => {
     const data = {emailMessage,emailAddress,emailSubject}
-    console.log(data);
     if (!data) {
       return openNotificationWithIcon('error', 'Failed Operation', 'Please fill the data');
     }
@@ -49,7 +48,6 @@ export const SendEmail = (props) => {
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
             const email = formJson.email;
-            console.log(email);
             handleCloseEmail();
           },
         }}

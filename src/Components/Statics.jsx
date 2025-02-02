@@ -6,7 +6,6 @@ import { MdMarkEmailUnread } from "react-icons/md";
 import {AppContext} from '../Context/getData';
 export const Statics = () => {
   const { statics } = useContext(AppContext)
-  console.log(statics);
   return (
     <div className="statics-cont">
       <div className='static'>
