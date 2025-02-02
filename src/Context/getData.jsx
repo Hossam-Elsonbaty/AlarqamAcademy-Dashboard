@@ -52,42 +52,42 @@ const AppProvider = ({ children }) => {
     setOpen(false);
   };
   const getStatics = async ()=> {
-    await axios.get('https://al-arqam-banckend.vercel.app/api/statics', {
+    await axios.get(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/statics`, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then((res)=>{
       setStatics(res.data);
     }).catch(err => handleUnauthorizedError(err))
   }
   const getContactData = async () => {
-    await axios.get('https://al-arqam-banckend.vercel.app/api/contact-us', {
+    await axios.get(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/contact-us`, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then((res)=>{
       setApplicationsData(res.data);
     }).catch(err => handleUnauthorizedError(err))
   };
   const getStudentApplicationsData = async () => {
-    await axios.get('https://al-arqam-banckend.vercel.app/api/student-application', {
+    await axios.get(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/student-application`, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then((res)=>{
       setApplicationsData(res.data);
     }).catch(err => handleUnauthorizedError(err))
   };
   const getParentApplicationsData = async () => {
-    await axios.get('https://al-arqam-banckend.vercel.app/api/parent-application', {
+    await axios.get(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/parent-application`, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then((res)=>{
       setApplicationsData(res.data);
     }).catch(err => handleUnauthorizedError(err))
   };
   const getUsersData = async () => {
-    await axios.get('https://al-arqam-banckend.vercel.app/api/users', {
+    await axios.get(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/users`, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then((res)=>{
       setApplicationsData(res.data);
     }).catch(err => handleUnauthorizedError(err))
   };
   const getDonationsData = async (type) => {
-    await axios.get('https://al-arqam-banckend.vercel.app/api/transactions', {
+    await axios.get(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/transactions`, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then((res)=>{
       if(type){

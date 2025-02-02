@@ -9,9 +9,8 @@ export const Login = () => {
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
-    // https://al-arqam-banckend.vercel.app/api/login
     try {
-      const response = await fetch('https://al-arqam-banckend.vercel.app/api/login', {
+      const response = await fetch(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/login`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

@@ -8,8 +8,9 @@ export const NestedTable = () => {
   const {isApplication, isParent, handleClickOpen, getUsersData,
         applicationsData, handleClickOpenEmail} = useContext(AppContext);
   const token = localStorage.getItem('token');
+  console.log(process.env.REACT_APP_STRIPE_PUBLIC_KEY2);
   const deleteUser = async (userId) => {
-    const url = `https://al-arqam-banckend.vercel.app/api/users/${userId}`;
+    const url = `${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/users/${userId}`;
     try {
       const response = await fetch(url, {
         method: 'DELETE', // HTTP method for deletion
@@ -315,7 +316,7 @@ export const NestedTable = () => {
       <SendEmail emailAddress={selectedRows} disabled/>
       {isApplication==="users"
         ?
-          <Button disabled style={{width:"fit-content"}} variant="outlined" onClick={handleClickOpen}>
+          <Button  disabled= {selectedRows.length<1? true: false} style={{width:"fit-content"}} variant="outlined" onClick={handleClickOpen}>
             Add new user
           </Button>
           :      
