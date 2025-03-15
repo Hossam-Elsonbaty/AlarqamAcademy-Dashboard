@@ -19,7 +19,7 @@ export const Login = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('al-arqam-academy-chicago_authToken', data.token);
         getStudentApplicationsData()
         navigate("/", { replace: true });
       } else {
