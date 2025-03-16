@@ -7,7 +7,7 @@ export const NestedTable = () => {
   const [selectedRows, setSelectedRows] = useState([])
   const {isApplication, isParent, handleClickOpen, getUsersData,
         applicationsData, handleClickOpenEmail} = useContext(AppContext);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('al-arqam-academy-chicago_authToken');
   console.log(process.env.REACT_APP_STRIPE_PUBLIC_KEY2);
   const deleteUser = async (userId) => {
     const url = `${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/users/${userId}`;

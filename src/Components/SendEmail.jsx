@@ -13,7 +13,7 @@ export const SendEmail = (props) => {
   const {handleCloseEmail, openEmail,openNotificationWithIcon} = useContext(AppContext)
   const [emailMessage, setEmailMessage] = useState('')
   const [emailSubject, setEmailSubject] = useState('')
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('al-arqam-academy-chicago_authToken');
   const handleEmailSubmit = async () => {
     const data = {emailMessage,emailAddress,emailSubject}
     if (!data) {

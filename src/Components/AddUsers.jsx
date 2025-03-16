@@ -13,7 +13,7 @@ export const AddUsers = () => {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const isSuperuser = false
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('al-arqam-academy-chicago_authToken');
   const handleUsersSubmit = async () => {
     let userData = { username, password, isSuperuser};
     if (!username || !password) {

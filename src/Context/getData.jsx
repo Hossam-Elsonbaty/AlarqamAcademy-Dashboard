@@ -4,7 +4,7 @@ import { useNavigate} from "react-router-dom";
 import { notification } from 'antd';
 const AppContext = createContext();
 const AppProvider = ({ children }) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('al-arqam-academy-chicago_authToken');
   useEffect(() => {
     if (token) {
       getStudentApplicationsData();

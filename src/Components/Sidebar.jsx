@@ -40,7 +40,7 @@ export const Sidebar = () => {
     setIsParent(false);
   }
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('al-arqam-academy-chicago_authToken');
     window.location.href = `${window.location.origin}/login`
   };
   const items = [
