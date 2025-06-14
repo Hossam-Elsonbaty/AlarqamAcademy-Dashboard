@@ -34,3 +34,14 @@ body{
   background-color: #aa0000 !important;
   color: #fff !important;
 }
+.add-email-text-area {
+  width: 100%;
+  background: transparent;
+  outline: none;
+  border-bottom: 1px solid #c4c4c4;
+  margin-top: 8px;
+  height: auto;
+  &::placeholder {
+    color: #c4c4c4;
+  }
+}

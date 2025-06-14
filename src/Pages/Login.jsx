@@ -10,7 +10,7 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/login`, {
+      const response = await fetch(`http://localhost:5555/api/login`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

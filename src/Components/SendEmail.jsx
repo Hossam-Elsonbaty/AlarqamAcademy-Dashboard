@@ -61,18 +61,6 @@ export const SendEmail = (props) => {
             autoFocus
             required
             margin="dense"
-            id="emailMessage"
-            name="emailMessage"
-            label="Your Message"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e)=>{setEmailMessage(e.target.value)}}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
             id="emailSubject"
             name="emailSubject"
             label="Your email subject"
@@ -80,6 +68,21 @@ export const SendEmail = (props) => {
             fullWidth
             variant="standard"
             onChange={(e)=>{setEmailSubject(e.target.value)}}
+          />
+          <textarea
+            className='add-email-text-area'
+            autoFocus
+            required
+            margin="dense"
+            id="emailMessage"
+            name="emailMessage"
+            label="Your Message"
+            rows={5}
+            type="text"
+            placeholder='Your message here...'
+            fullWidth
+            variant="standard"
+            onChange={(e)=>{setEmailMessage(e.target.value)}}
           />
         </DialogContent>
         <DialogActions>

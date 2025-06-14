@@ -66,7 +66,7 @@ const AppProvider = ({ children }) => {
     }).catch(err => handleUnauthorizedError(err))
   };
   const getStudentApplicationsData = async () => {
-    await axios.get(`${process.env.REACT_APP_STRIPE_PUBLIC_KEY2}/api/student-application`, {
+    await axios.get(`http://localhost:5555/api/student-application`, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then((res)=>{
       setApplicationsData(res.data);

@@ -206,6 +206,21 @@ body {
   color: #fff !important;
 }
 
+.add-email-text-area {
+  width: 100%;
+  background: transparent;
+  outline: none;
+  border-bottom: 1px solid #c4c4c4;
+  margin-top: 8px;
+  height: auto;
+}
+.add-email-text-area::-moz-placeholder {
+  color: #c4c4c4;
+}
+.add-email-text-area::placeholder {
+  color: #c4c4c4;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;/*# sourceMappingURL=App.css.map */
